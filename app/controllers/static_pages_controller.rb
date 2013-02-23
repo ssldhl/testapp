@@ -6,9 +6,13 @@ class StaticPagesController < ApplicationController
   def data
   	require 'csv'
 
+  	@info = [["Health vs. Wealth"], ["Mortality Rate"]]
+  	#@data_to = params[:data_types]
+  	
+
 	start = Array.new(){Array.new()}
 	i=1
-	while i<3 do
+	while i<13 do
 		start.push(CSV.read(Rails.root.join("public/resources/#{i}.csv").to_s))
 		i=i+1
 	end
@@ -36,26 +40,45 @@ class StaticPagesController < ApplicationController
 				data.push(start[i][j][k].to_i)
 				i=i+1
 			end
-			data.push(data[data.size-start[0][0].size])
+			if j==1
+				data.push("Nepal")
+			elsif j==2
+				data.push("Afganistan")
+			elsif j==3
+				data.push("Bangladesh")
+			elsif j==4
+				data.push("Maldives")
+			elsif j==5
+				data.push("Pakistan")
+			elsif j==6
+				data.push("Sri Lanka")
+			elsif j==7
+				data.push("India")
+			elsif j==8
+				data.push("Bhutan")
+			end
 			k=k+1
 		end
 		j=j+1
 	end
 
-	final = data.each_slice(start[0][0].size+1).to_a
+	final = data.each_slice(15).to_a
 
 	data_table = GoogleVisualr::DataTable.new
 
 	data_table.new_column('string', 'Location' )
 	data_table.new_column('number' , 'Date' )
-	data_table.new_column('number', 'Sales' )
-	data_table.new_column('number', 'Expenses')
+	i=0
+	while i<header.size do
+		data_table.new_column('number', header[i] )
+		i=i+1
+	end
 	data_table.new_column('string', 'Location')
 
 	# Add Rows and Values
 	data_table.add_rows(final)
 
-	option = { width: 400, height: 240, title: 'Country Performance' }
+	option = { width: 800, height: 480, title: 'Country Performance' }
 	@chart = GoogleVisualr::Interactive::MotionChart.new(data_table, option)
   end
 
