@@ -1,4 +1,4 @@
-# Ruby on Rails Google Visualization API: sample application
+# Data Track using Ruby on Rails Google Visualization API
 
-This is the sample application for [*Ruby on Rails Google Visualization API*](http://googlevisualr.herokuapp.com/) by [Sushil Dahal](http://www.twitter.com/sushilthe).
+This is the web application for Data Analysis[*Track Data*](http://track-data.herokuapp.com/).
 
