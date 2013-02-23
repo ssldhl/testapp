@@ -6,10 +6,6 @@ class StaticPagesController < ApplicationController
   def data
   	require 'csv'
 
-  	@info = [["Health vs. Wealth"], ["Mortality Rate"]]
-  	#@data_to = params[:data_types]
-  	
-
 	start = Array.new(){Array.new()}
 	i=1
 	while i<13 do
@@ -78,7 +74,7 @@ class StaticPagesController < ApplicationController
 	# Add Rows and Values
 	data_table.add_rows(final)
 
-	option = { width: 800, height: 480, title: 'Country Performance' }
+	option = { width: 800, height: 440, title: 'Country Performance' }
 	@chart = GoogleVisualr::Interactive::MotionChart.new(data_table, option)
   end
 
